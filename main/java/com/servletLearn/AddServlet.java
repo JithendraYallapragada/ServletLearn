@@ -5,9 +5,11 @@ import java.io.PrintWriter;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class AddServlet extends HttpServlet{
 	
@@ -19,9 +21,19 @@ public class AddServlet extends HttpServlet{
 		
 	//Using the sendRedirect(url);
 		
-		//Sends the response as the url and the url is added by the addServlet attributes so the data is transferred!!
-		res.sendRedirect("square?k="+k);
-
+		//cookie management
+//		Cookie c=new Cookie("k",k+"");
+//		res.addCookie(c);
+		
+		
+		//Session management
+		HttpSession hs= req.getSession();
+		hs.setAttribute("k", k);
+		
+		
+		
+		res.sendRedirect("square");
+		
 	}	
 
 }
